@@ -10,19 +10,43 @@ hiddenWords = valid_combos(startWord);
 
 startWord = scramble(startWord);
 console.log("Available letters: " + startWord + "\n");
-function starting() {
+
 for(var i = 0; i < hiddenWords.length; i++){
 for (var j = 0; j < hiddenWords[i].length; j++){
    var output = ("- ".repeat(hiddenWords[i].length)+"\n");
 }
 console.log(output);
 }
+
+while (guessedWords.length < hiddenWords.length){ 
+    var guess = prompt("Enter a guess: ");
+if (guess != null){
+
+ if(guess == "*"){
+    alert("scrambling root word...");
+    startWord = scramble(startWord);
+    console.log(startWord);
+ } else if(guess.length > max_len){
+     alert("guess is too long, try again");
+ } else if(guess.length < min_len){
+     alert("guess is too short, try again")
+ } else if(hiddenWords.includes(guess)){
+   alert("Correct guess! you guessed " + guess);
+   guessedWords.push(guess);
+   console.log(guess);
+ } else {
+     alert("word does not exist, try again");
+ } 
+} else {
+    ending();
+   return;
 }
-starting();
+}
 
+function ending(){
+ var str = "You answered " + guessedWords.length + " out of " + hiddenWords.length + "! \n";
 
-
-
+}
 
 
 function generate_dictionary(){
