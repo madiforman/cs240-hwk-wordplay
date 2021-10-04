@@ -21,22 +21,40 @@ function get_root_words(){
 }
 
 let startWord = availableWords[Math.floor(Math.random() * availableWords.length)];
-function get_permutations(str) {
-    let result = [];
-    for(let i = 0; i < str.length; i++){
-        const currentChar = str[i];
-        const remainingChars = str.slice(0,i) + str.slice(i+1);
-        for(let j = 0; j < remainingChars.length; j++){
-            result.push(currentChar + get_permutations(remainingChars));
+function permutations(str) {
+    if(str.length < 2) {
+        return str;
+    }  
+    var perms = [];
+        for(var i = 0; i < str.length; i++){
+            var char = str[i];
+         if(str.indexOf(char)!= i){
+             continue;
+         }
+         var remainingStr = str.slice(0,i) + str.slice(i+1,str.length);
+         for(var sub of permutations(remainingStr)) {
+             perms.push(char+sub);
+         }
         }
-    }
-    return result;
+        return perms;
 }
 
 
 
 
 
-var permutations = get_permutations(startWord);
-for(var i = 0; i < permutations.length; i++){
-console.log(permutations[i]); }
+function get_valid_perms(){
+    var perms = permutations(startWord);
+    for(let i = 0; i < perms.length; i++) {
+        if(availableWords.includes(perms[i])){
+            hiddenWords.push(perms[i])
+        }
+    }
+
+}
+
+get_valid_perms();
+
+
+for(var i = 0; i < hiddenWords.length; i++){
+console.log(hiddenWords[i]); }
