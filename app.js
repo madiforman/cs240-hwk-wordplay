@@ -7,32 +7,38 @@ generate_dictionary();
 get_root_words();
 let startWord = availableWords[Math.floor(Math.random() * availableWords.length)];
 hiddenWords = valid_combos(startWord);
-var change_display = false;
+
 startWord = scramble(startWord);
 
 
 
 
-function display(bool, word) {
-var output = "";
+function display() {
+var output = [];
+console.log("Available letters: " + startWord + "\n");
 for(var i = 0; i < hiddenWords.length; i++){
 for (var j = 0; j < hiddenWords[i].length; j++){
     output = ("- ".repeat(hiddenWords[i].length)+"\n");
-    if(bool == true){
-        var str = output.substring(hiddenWords.indexOf(word),word.length);
-        str = str.replace(/-/g, word);
-        output[hiddenWords.indexOf(word)] = str;
-    } 
-    
 }
 console.log(output);
 }
 }
 
+function update_display(word){
+    var output = [];
+    for(var i = 0; i < hiddenWords.length; i++){
+    for (var j = 0; j < hiddenWords[i].length; j++){
+        output = ("- ".repeat(hiddenWords[i].length)+"\n");
+
+    }
+    output[hiddenWords.indexOf(word)] = word;
+    console.log(output);
+    }
+
+}
 
 while (guessedWords.length < hiddenWords.length){ 
-    display(false);
-    console.log("Available letters: " + startWord + "\n");
+    display();
     var guess = prompt("Enter a guess: ");
  if(guess == null){
     ending();
@@ -50,17 +56,18 @@ while (guessedWords.length < hiddenWords.length){
  } else if(hiddenWords.includes(guess)){
     alert("Correct guess! you guessed " + guess);
     guessedWords.push(guess);
-    display(true,guess);
+    console.log(guess);
  }
  else {
      alert("word does not exist, try again");
  }
- console.clear();
 } 
-//need to print key
 function ending(){
  var str = "You answered " + guessedWords.length + " out of " + hiddenWords.length + "! \n";
  console.log(str);
+ for(var i = 0; i < hiddenWords.length; i++){
+ console.log(hiddenWords[i]);
+ }
 }
 
 
