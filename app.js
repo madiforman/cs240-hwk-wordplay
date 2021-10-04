@@ -21,4 +21,22 @@ function get_root_words(){
 }
 
 let startWord = availableWords[Math.floor(Math.random() * availableWords.length)];
-console.log(startWord);
+function get_permutations(str) {
+    let result = [];
+    for(let i = 0; i < str.length; i++){
+        const currentChar = str[i];
+        const remainingChars = str.slice(0,i) + str.slice(i+1);
+        for(let j = 0; j < remainingChars.length; j++){
+            result.push(currentChar + get_permutations(remainingChars));
+        }
+    }
+    return result;
+}
+
+
+
+
+
+var permutations = get_permutations(startWord);
+for(var i = 0; i < permutations.length; i++){
+console.log(permutations[i]); }
