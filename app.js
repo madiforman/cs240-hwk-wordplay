@@ -5,6 +5,25 @@ availableWords = [],
 rootWords = [];
 generate_dictionary();
 get_root_words();
+let startWord = availableWords[Math.floor(Math.random() * availableWords.length)];
+hiddenWords = valid_combos(startWord);
+
+startWord = scramble(startWord);
+console.log("Available letters: " + startWord + "\n");
+function starting() {
+for(var i = 0; i < hiddenWords.length; i++){
+for (var j = 0; j < hiddenWords[i].length; j++){
+   var output = ("- ".repeat(hiddenWords[i].length)+"\n");
+}
+console.log(output);
+}
+}
+starting();
+
+
+
+
+
 
 function generate_dictionary(){
     for(index = 0; index < dictionary.length; index++){
@@ -19,9 +38,6 @@ function get_root_words(){
         rootWords.push(availableWords[index]);
     }
 }
-
-let startWord = availableWords[Math.floor(Math.random() * availableWords.length)];
-
 function combos(str){
     var len = str.length, result = [], indx = 0;
     while(indx < len){
@@ -36,9 +52,6 @@ function combos(str){
     }
     return result;
 }
-
-
-
 function valid_combos(str){
     options = combos(startWord);
     result = [];
@@ -51,10 +64,17 @@ return result;
 }
 
 
+function scramble(str) {
+    let arr = str.split(''),
+    len = arr.length;
+   for (var i = 0; i < len; i++){
+       let j = Math.floor(Math.random() * str.length);
+       let temp = arr[i];
+       arr[i] = arr[j];
+       arr[j] = temp;
+       }
+   str = arr.join('');
+   return str;
+     }
 
-hiddenWords = valid_combos(startWord);
 
-
-
-for(var i = 0; i < hiddenWords.length; i++){
-    console.log(hiddenWords[i]); }
