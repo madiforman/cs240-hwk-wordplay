@@ -21,40 +21,40 @@ function get_root_words(){
 }
 
 let startWord = availableWords[Math.floor(Math.random() * availableWords.length)];
-function permutations(str) {
-    if(str.length < 2) {
-        return str;
-    }  
-    var perms = [];
-        for(var i = 0; i < str.length; i++){
-            var char = str[i];
-         if(str.indexOf(char)!= i){
-             continue;
-         }
-         var remainingStr = str.slice(0,i) + str.slice(i+1,str.length);
-         for(var sub of permutations(remainingStr)) {
-             perms.push(char+sub);
-         }
+
+function combos(str){
+    var len = str.length, result = [], indx = 0;
+    while(indx < len){
+        var char = str.charAt(indx);
+        var x;
+        var arrTemp = [char];
+        for(x in result) {
+            arrTemp.push(""+result[x]+char);
         }
-        return perms;
-}
-
-
-
-
-
-function get_valid_perms(){
-    var perms = permutations(startWord);
-    for(let i = 0; i < perms.length; i++) {
-        if(availableWords.includes(perms[i])){
-            hiddenWords.push(perms[i])
-        }
+        result = result.concat(arrTemp);
+        indx++;
     }
-
+    return result;
 }
 
-get_valid_perms();
+
+
+function valid_combos(str){
+    options = combos(startWord);
+    result = [];
+      for(var j = 0; j < options.length; j++){
+        if(availableWords.includes(options[j])){
+            result.push(options[j]);
+        }
+}
+return result;
+}
+
+
+
+hiddenWords = valid_combos(startWord);
+
 
 
 for(var i = 0; i < hiddenWords.length; i++){
-console.log(hiddenWords[i]); }
+    console.log(hiddenWords[i]); }
