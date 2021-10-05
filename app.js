@@ -77,7 +77,7 @@ function get_root_words(){
 //function for getting all possibly sub strings of root word
 function combos(str){
     let arr = [];  //temporary array
-    for (let x = 0, y=1; x < str.length+1; x++,y++) {
+    for (let x = 0, y=1; x < str.length; x++,y++) {
        arr[x]=str.substring(x, y);
   }
     let result = []; //to store finished permutations
@@ -85,7 +85,7 @@ function combos(str){
     let len = Math.pow(2, arr.length); //2* length of each substring
     for (let i = 0; i < len; i++){
        temp= "";
-       for (let j=0;j<len+1;j++) {
+       for (let j=0;j<len;j++) {
           if ((i & Math.pow(2,j))){//bitwise comparison
              temp += arr[j];
           }
@@ -96,6 +96,7 @@ function combos(str){
     }
     return result;
 }
+
 
 //see if combination exists in available words
 function valid_combos(str){
